@@ -35,9 +35,16 @@ public class ArithmeticServlet extends HttpServlet {
         
         
         //check to make sure values are entered
+        if (first == null && first.equals("") &&
+                second == null && second.equals("")) {
+            request.setAttribute("message",  "result: " + "---");
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
+            return;
+        }
+        //check to make sure values are entered
         if (first == null || first.equals("") ||
                 second == null || second.equals("")) {
-            request.setAttribute("message",  "result: " + "---");
+            request.setAttribute("message",  "result: " + "invalid");
             getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
             return;
         }
@@ -74,8 +81,7 @@ public class ArithmeticServlet extends HttpServlet {
             request.setAttribute("message",  "result: " + result);
             getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
         }
-        
-//            getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);  
+         
     }
 
 }
