@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,13 +27,14 @@ public class AgeCalculatorServlet extends HttpServlet {
         String age = request.getParameter("age");
         request.setAttribute("age", age);
         
-        
+        //Display a message if no value is entered
         if (age == null || age.equals("")) {
             request.setAttribute("message", "you must enter a number");
             getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
             return;
         }
         
+        //calculate age next birthday
         int result = Integer.parseInt(age);
         
             result = result + 1;

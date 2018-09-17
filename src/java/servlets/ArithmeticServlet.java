@@ -52,11 +52,12 @@ public class ArithmeticServlet extends HttpServlet {
             return;
         }
         
-        
+        //convert string values to integer for calculations
         int fNum = Integer.parseInt(first);
         int sNum = Integer.parseInt(second);
         int result;
         
+        //calculations
         if (request.getParameter("add") != null) {
            
             result = fNum + sNum;
