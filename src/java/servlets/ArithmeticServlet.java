@@ -33,21 +33,25 @@ public class ArithmeticServlet extends HttpServlet {
         request.setAttribute("second", second);
         
         
-        
-        //check to make sure values are entered
-        if (first == null && first.equals("") &&
-                second == null && second.equals("")) {
+        //display blank calculation if no values are entered
+        if (first == null || first.equals("") &&
+                second == null || second.equals("")) {
             request.setAttribute("message",  "result: " + "---");
             getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
             return;
         }
-        //check to make sure values are entered
-        if (first == null || first.equals("") ||
-                second == null || second.equals("")) {
+        //display error message if only one value is entered
+        else if (first != null && second.equals("") || second == null) {
             request.setAttribute("message",  "result: " + "invalid");
             getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
             return;
         }
+        else if(first.equals("") || first == null && second != null) {
+            request.setAttribute("message",  "result: " + "invalid");
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
+            return;
+        }
+        
         
         int fNum = Integer.parseInt(first);
         int sNum = Integer.parseInt(second);
@@ -60,6 +64,7 @@ public class ArithmeticServlet extends HttpServlet {
             request.setAttribute("message",  "result: " + result);
             getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
         }
+        
         if (request.getParameter("subtract") != null) {
            
             result = fNum - sNum;
@@ -67,6 +72,7 @@ public class ArithmeticServlet extends HttpServlet {
             request.setAttribute("message",  "result: " + result);
             getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
         }
+        
         if (request.getParameter("multiply") != null) {
            
             result = fNum * sNum;
@@ -74,6 +80,7 @@ public class ArithmeticServlet extends HttpServlet {
             request.setAttribute("message",  "result: " + result);
             getServletContext().getRequestDispatcher("/WEB-INF/arithmetic.jsp").forward(request, response);
         }
+        
         if (request.getParameter("divide") != null) {
            
             result = fNum / sNum;
